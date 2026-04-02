@@ -1,0 +1,54 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f7f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 15px; 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+  width: 100%;
+  max-width: 400px;
+  transition: filter 0.5s ease; /* เพิ่มเพื่อให้ตอนเบลอมันดูนุ่มนวล */
+}
+
+/* คลาสสำหรับสั่งเบลอ */
+.blur-content {
+  filter: blur(8px) !important;
+  pointer-events: none;
+  user-select: none;
+}
+
+input {
+  display: block; width: 100%; padding: 12px; margin: 10px 0;
+  border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; outline: none;
+}
+
+button {
+  width: 100%; padding: 12px; background-color: #1107c3; color: white;
+  border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
+  display: flex; justify-content: center; align-items: center; margin-top: 10px;
+}
+
+li {
+  background: #f9f9f9; margin-bottom: 8px; padding: 10px 15px;
+  border-radius: 8px; display: flex; align-items: center;
+  justify-content: flex-start; border-left: 5px solid #6c63ff;
+}
+
+.editBtn, .deleteBtn {
+  display: inline-flex; width: auto; min-width: 60px; height: 30px;
+  padding: 5px 10px; margin-left: 5px; font-size: 0.8rem;
+  background-color: #5a58c3; color: #ffffff;
+}
+
+#clearBtn {
+  display: none;
+  background-color: #ff4757;
+}
