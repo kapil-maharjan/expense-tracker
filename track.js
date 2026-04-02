@@ -5,6 +5,7 @@ const list = document.getElementById('list');
 const totalDisplay = document.getElementById('total');
 const clearBtn = document.getElementById('clearBtn');
 const container = document.querySelector('.container');
+const pingSound = new Audio('button-20.mp3');
 
 let total = 0;
 
@@ -99,6 +100,7 @@ clearBtn.addEventListener('click', function() {
          container.classList.remove('blur-content');
             
             alert("ล้างข้อมูลเรียบร้อยแล้วครับ");
+            pingSound.play();
     } else {
         container.classList.remove('blur-content');
     }
