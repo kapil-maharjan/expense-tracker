@@ -123,8 +123,8 @@ clearBtn.addEventListener('click', function() {
             list.innerHTML = "";
             saveToStorage();
             container.classList.remove('blur-content');
-            alert("ล้างข้อมูลเรียบร้อยแล้วครับ");
             pingSound.play();
+            alert("ล้างข้อมูลเรียบร้อยแล้วครับ");
         } else {
             container.classList.remove('blur-content');
         }
