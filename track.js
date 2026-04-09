@@ -6,20 +6,45 @@ const totalDisplay = document.getElementById('total');
 const clearBtn = document.getElementById('clearBtn');
 const container = document.querySelector('.container');
 const pingSound = new Audio('button-20.mp3');
-
 let total = 0;
+let myChart;
+
+
+
+function initChart() {
+    const ctx = document.getElementById('expenseChart').getContext('2d');
+    myChart = new Chart(ctx, {
+        type: 'pie', //doughnut or line
+        data: {
+            labels: [],
+            datasets: [{
+                data: [],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
+            }]
+        },
+        options: { responsive: true }
+    });
+}
+
+function updateChart(items) {
+    if (!myChart) return;
+    const names = items.map(item => item.name);
+    const amounts = items.map(item => item.amount);
+    myChart.data.labels = names;
+    myChart.data.datasets[0].data = amounts;
+    myChart.update();
+}
+
+// --- 2. THE CORE LOGIC ---
 
 function updateClearButton() {
-    if (list.children.length > 0) {
-        clearBtn.style.display = "block";
-    } else {
-        clearBtn.style.display = "none";
-    }
+    clearBtn.style.display = list.children.length > 0 ? "block" : "none";
 }
 
 function saveToStorage() {
     const items = [];
     let newTotal = 0;
+    
     document.querySelectorAll('#list li').forEach(li => {
         const text = li.querySelector('span').textContent;
         const name = text.split(':')[0].trim();
@@ -29,11 +54,14 @@ function saveToStorage() {
             newTotal += amountValue;
         }
     });
+
     total = newTotal;
     totalDisplay.textContent = total;
     localStorage.setItem('expenses', JSON.stringify(items));
     localStorage.setItem('total', total);
+    
     updateClearButton();
+    updateChart(items); 
 }
 
 function createRow(name, price) {
@@ -66,9 +94,10 @@ function createRow(name, price) {
 }
 
 window.onload = function() {
+    initChart(); 
     const savedItems = JSON.parse(localStorage.getItem('expenses')) || [];
     savedItems.forEach(item => createRow(item.name, item.amount));
-    saveToStorage();
+    saveToStorage(); 
 };
 
 addBtn.addEventListener('click', function() {
@@ -76,9 +105,7 @@ addBtn.addEventListener('click', function() {
     const price = Number(amountInput.value);
 
     if (name !== "" && price > 0) {
-        // หายเบลอเมื่อเพิ่มรายการใหม่
         container.classList.remove('blur-content');
-        
         createRow(name, price);
         saveToStorage();
         itemInput.value = "";
@@ -90,22 +117,18 @@ addBtn.addEventListener('click', function() {
 });
 
 clearBtn.addEventListener('click', function() {
-
     container.classList.add('blur-content');
-
     setTimeout(() => {          
-    if (confirm("คุณต้องการลบรายการทั้งหมดใช่หรือไม่?")) {
-        list.innerHTML = "";
-        saveToStorage();
-         container.classList.remove('blur-content');
-            
+        if (confirm("คุณต้องการลบรายการทั้งหมดใช่หรือไม่?")) {
+            list.innerHTML = "";
+            saveToStorage();
+            container.classList.remove('blur-content');
             alert("ล้างข้อมูลเรียบร้อยแล้วครับ");
             pingSound.play();
-    } else {
-        container.classList.remove('blur-content');
-    }
-}, 100);
-
+        } else {
+            container.classList.remove('blur-content');
+        }
+    }, 100);
 });
 
 amountInput.addEventListener('keypress', (e) => e.key === 'Enter' && addBtn.click());
