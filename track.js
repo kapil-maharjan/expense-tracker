@@ -9,12 +9,10 @@ const pingSound = new Audio('button-20.mp3');
 let total = 0;
 let myChart;
 
-
-
 function initChart() {
     const ctx = document.getElementById('expenseChart').getContext('2d');
     myChart = new Chart(ctx, {
-        type: 'pie', //doughnut or line
+        type: 'pie',
         data: {
             labels: [],
             datasets: [{
@@ -61,7 +59,7 @@ function saveToStorage() {
     localStorage.setItem('total', total);
     
     updateClearButton();
-    updateChart(items); 
+    updateChart(items); // Update the chart whenever we save
 }
 
 function createRow(name, price) {
@@ -93,11 +91,13 @@ function createRow(name, price) {
     });
 }
 
+// --- 3. EVENT LISTENERS ---
+
 window.onload = function() {
-    initChart(); 
+    initChart(); // Initialize chart first
     const savedItems = JSON.parse(localStorage.getItem('expenses')) || [];
     savedItems.forEach(item => createRow(item.name, item.amount));
-    saveToStorage(); 
+    saveToStorage(); // This calculates total and fills the chart
 };
 
 addBtn.addEventListener('click', function() {
@@ -125,6 +125,7 @@ clearBtn.addEventListener('click', function() {
             container.classList.remove('blur-content');
             pingSound.play();
             alert("ล้างข้อมูลเรียบร้อยแล้วครับ");
+            
         } else {
             container.classList.remove('blur-content');
         }
@@ -133,3 +134,12 @@ clearBtn.addEventListener('click', function() {
 
 amountInput.addEventListener('keypress', (e) => e.key === 'Enter' && addBtn.click());
 itemInput.addEventListener('keypress', (e) => e.key === 'Enter' && amountInput.focus());
+
+const config = {
+    type: 'pie', // หรือ bar
+    data: data,
+    options: {
+        responsive: true,
+        maintainAspectRatio: true, // รักษาสัดส่วนกราฟไว้
+    }
+};
