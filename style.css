@@ -1,54 +1,91 @@
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #f4f7f6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 15px; 
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
-  width: 100%;
-  max-width: 400px;
-  transition: filter 0.5s ease; /* เพิ่มเพื่อให้ตอนเบลอมันดูนุ่มนวล */
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
 }
 
-/* คลาสสำหรับสั่งเบลอ */
+h2, h3 {
+    color: #2c3e50;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+
 .blur-content {
   filter: blur(8px) !important;
   pointer-events: none;
   user-select: none;
 }
 
-input {
-  display: block; width: 100%; padding: 12px; margin: 10px 0;
-  border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; outline: none;
+input { 
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
 }
 
 button {
-  width: 100%; padding: 12px; background-color: #1107c3; color: white;
-  border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
-  display: flex; justify-content: center; align-items: center; margin-top: 10px;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-bottom: 10px;
 }
 
-li {
-  background: #f9f9f9; margin-bottom: 8px; padding: 10px 15px;
-  border-radius: 8px; display: flex; align-items: center;
-  justify-content: flex-start; border-left: 5px solid #6c63ff;
-}
-
-.editBtn, .deleteBtn {
-  display: inline-flex; width: auto; min-width: 60px; height: 30px;
-  padding: 5px 10px; margin-left: 5px; font-size: 0.8rem;
-  background-color: #5a58c3; color: #ffffff;
+button:hover {
+    background-color: #0056b3;
 }
 
 #clearBtn {
-  display: none;
-  background-color: #ff4757;
+    background-color: #d71717;
+    margin-top: 20px;
+}
+
+#clearBtn:hover {
+    background-color: #d53b3b;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #f8f9fa;
+    margin: 5px 0;
+    padding: 10px;
+    border-left: 4px solid #007bff; 
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 30px;
+    box-sizing: border-box;
 }
